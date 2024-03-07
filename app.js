@@ -26,6 +26,10 @@ app.get('/', (req, res) => {
   res.sendFile('homepage.html',{ root: __dirname });
 });
 
+app.get('/.well-known/assetlinks.json', (req, res) => {
+  res.sendFile('.well-known/assetlinks.json',{ root: __dirname });
+});
+
 app.get('/1', (req, res) => {
   res.sendFile('search.html',{ root: __dirname });
 })
