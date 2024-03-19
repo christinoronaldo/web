@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Distance</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <style>
+    video::-webkit-media-controls-fullscreen-button {
+      display: none;
+    }
+    video::-webkit-media-controls-enclosure {
+      display: none;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7); 
+      z-index: 1000;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border: 4px solid teal; 
+      border-radius: 5px;
+      text-align: center;
+      z-index: 1001;
+      font-family: 'Pacifico', cursive;
+    }
+    .popup-close-button {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-family: 'Pacifico', cursive;
+    }
+    .popup.fade-in {
+      animation: fade-in 0.5s;
+    }
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .post-container {
+      width: 400px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+    .post-date {
+      background-color: #f0f0f0;
+      padding: 5px;
+      text-align: left;
+      font-size: 10px;  
+    }
+    .user-details {
+      display: flex;
+      align-items: flex-end; 
+      padding: 10px;
+    }
+    .user-details img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .username {
+      margin-left: 10px;
+      font-weight: bold;
+      font-size: 20px;  
+    }
+    .audio-info {
+      color: #555;
+      font-size: 10px;  
+      margin-left: 10px;  
+      order: 1; 
+    }
+    .video-container {
+      position: relative;
+    }
+    .video {
+      max-width: 100%;
+      display: block;
+    }
+    .like-comments {
+      padding: 6px;
+    }
+    .like-icon, .comment-icon {
+      margin-right: 4px;
+    }
+    .like-icon, .comment-icon {
+      font-size: 24px;
+      font-weight: bold;  
+      color: #333;  
+      text-shadow: 1px 1px 2px #000;
+    }
+    .video-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 5px;
+      text-align: left;
+      font-weight: bold;
+      font-style: italic; 
+      font-size: 18px; 
+      font-family: 'Arial Black', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="post-container">
+    <div class="user-details">
+      <img src="https://firebasestorage.googleapis.com/v0/b/distance1-306c8.appspot.com/o/defaults%2Fhuf5dejXE8fyheqjn4ToAPrn0i03.jpg?alt=media&token=a0413a9f-7bd1-443e-ad37-402fa34d2852" alt="User Profile Picture">
+      <div>
+        <div class="username"><%= un %></div>
+        <div class="audio-info"><%= aud %></div>
+      </div>
+    </div>
+    <div class="video-container">
+      <video id="my-video" class="video" controls preload="auto" >
+        <source src="<%= vu %>" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-title"><%= t %></div>
+    </div>
+    <div class="post-date"><%= p %></div>
+    <div class="like-comments">
+      <i class="ion-ios-heart-outline like-icon"><%= l %></i>likes 	
+	<i class="space">.  </i> 
+      <i class="ion-ios-chatbubble-outline comment-icon"><%= c %></i>comments
+    </div>
+  </div>
+  <div class="popup-overlay" id="popup-overlay"></div>
+  <div id="popup" class="popup">
+    <p style="font-family: 'Pacifico', cursive;">Download App</p>
+    <button onclick="navigateToWebsite()" class="popup-close-button">Click here to Download</button>
+  </div>
+  </div>
+  <script>
+    var video = document.getElementById('my-video');
+    var popup = document.getElementById('popup');
+    var popupOverlay = document.getElementById('popup-overlay');
+
+    function showPopup() {
+      popup.style.display = 'block';
+      popup.classList.add('fade-in');
+      popupOverlay.style.display = 'block';
+    }
+
+    function closePopup() {
+      popup.style.display = 'none';
+      popupOverlay.style.display = 'none';
+    }
+
+    function navigateToWebsite() {
+      window.location.href = 'https://youtube.com';
+    }
+
+    video.addEventListener('ended', function() {
+      showPopup();
+    });
+  </script>
+</body>
+</html>
