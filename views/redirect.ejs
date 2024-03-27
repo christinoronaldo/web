@@ -5,8 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Detail</title> 
-    <meta http-equiv="refresh" content="0;url=https://mydiatance/video/?Id=<%= videoDetails.id %>">
 </head>
+<script>
+        function redirectToApp() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            var currentUrl = window.location.href;
+            var videoId = getParameterByName('videoId', currentUrl);
+
+            if (videoId) {
+                if (/android/i.test(userAgent)) {
+                    window.location.href = "https://mydiatance.in/video/?Id=" + videoId;
+                } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    window.location.href = "https://mydiatance.in/video/?Id=" + videoId;  
+                } else {
+                    window.location.href = "https://play.google.com/store/apps/details?id=your.app.package.name";
+                }
+            } else {
+                alert("Video ID is missing!");
+            }
+        }
+
+        function getParameterByName(name, url) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        window.onload = redirectToApp;
+    </script>
 <body>
     <h1>Video Detail</h1>
     <p>ID: <%= videoDetails.id %></p>
