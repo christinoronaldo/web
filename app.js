@@ -15,6 +15,7 @@ app.get('/.well-known/assetlinks.json', (req, res) => {
 });
 
 app.get('/reel', (req, res) => {
+  const userpro = req.query.param;
   const username = req.query.param1;
   const audio = req.query.param2;
   const videoUrl = req.query.param3;
@@ -24,7 +25,7 @@ app.get('/reel', (req, res) => {
   const comments = req.query.param7;
 
   app.get('/username/audio/videoUrl/title/postOn/', (reqNested, resNested) => {
-    resNested.render('distance', { un: username, aud: audio, vu: videoUrl, t: title, p:postOn, l:likes, c: comments});
+    resNested.render('distance', { up:userpro, un: username, aud: audio, vu: videoUrl, t: title, p:postOn, l:likes, c: comments});
   });
 });
 
