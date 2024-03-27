@@ -28,6 +28,24 @@ app.get('/reel', (req, res) => {
   });
 });
 
+app.get('/video', (req, res) => {
+  const videoId = req.query.position;
+  const videoDetails = {
+    id: videoId, 
+    url: `https://mydiatance.in/video/${videoId}`
+  };
+  res.json(videoDetails);
+});
+
+app.get('/user', (req, res) => {
+  const userId = req.query.Id;
+  const userDetails = {
+    id: userId, 
+    url: `https://mydiatance.in/user/${userId}`
+  };
+  res.json(videoDetails);
+});
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
