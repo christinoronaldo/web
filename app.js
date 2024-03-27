@@ -43,7 +43,7 @@ app.get('/user', (req, res) => {
     id: userId, 
     url: `https://mydiatance.in/user/${userId}`
   };
-  res.json(videoDetails);
+  res.render('redirect', { videoDetails });
 });
 
 app.listen(port, () => {
